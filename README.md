@@ -4,7 +4,7 @@ I am creating a database for chemical engineers consisting of spectroscopy data 
 This is version 1.00 for Public Testing.
 Initially it contains only infrared spectroscopy database collected from 
 "https://chem.libretexts.org/Bookshelves/Ancillary_Materials/Reference/Reference_Tables/Spectroscopic_Parameters/Infrared_Spectroscopy_Absorption_Table"
-==================================================I DO NOT OWN ANY RIGHTS FOR THE DATABASE!==================================================
+=========I DO NOT OWN ANY RIGHTS FOR THE DATABASE!==============
 
 INTRODUCTION:
 I am NOT A PROFESSIONAL PROGRAMMER. I have done some courses on Python from Coursera and have started on this journey. I am a Chemical Engineer by profession and will soon start my PhD. Since due to the pandemic, I have a lot of free time so I wanted to utilize it by doing something. Hence I embarked on this journey.
