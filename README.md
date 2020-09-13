@@ -8,6 +8,8 @@ Initially it contains only infrared spectroscopy database collected from
 
 =========I DO NOT OWN ANY RIGHTS FOR THE DATABASE!==============
 
+REQUIRED PYTHON VERSION: 3.8+
+
 CHANGELOG:
 
 V1.00
