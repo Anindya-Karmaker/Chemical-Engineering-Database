@@ -1,6 +1,5 @@
 import re
 import urllib.request, urllib.parse, urllib.error
-from bs4 import BeautifulSoup
 import ssl
 import sqlite3
 import tkinter as Tk
