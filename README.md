@@ -1,10 +1,21 @@
 # Chemical-Engineering-Database
 I am creating a database for chemical engineers consisting of spectroscopy data to thermodynamic tables so that engineers can do more work in less time
 
-This is version 1.00 for Public Testing.
+This is version 1.10 for Public Testing.
 Initially it contains only infrared spectroscopy database collected from 
 "https://chem.libretexts.org/Bookshelves/Ancillary_Materials/Reference/Reference_Tables/Spectroscopic_Parameters/Infrared_Spectroscopy_Absorption_Table"
 =========I DO NOT OWN ANY RIGHTS FOR THE DATABASE!==============
+CHANGELOG:
+
+V1.00
+Initial Release. Bugs: Some windows and help prompt does not work with exe file
+
+V1.10
+Fixed several bugs.
+Improved code.
+Fixed layout issues.
+Works independent of DB file.
+Removed unused libraries and comments.
 
 INTRODUCTION:
 I am NOT A PROFESSIONAL PROGRAMMER. I have done some courses on Python from Coursera and have started on this journey. I am a Chemical Engineer by profession and will soon start my PhD. Since due to the pandemic, I have a lot of free time so I wanted to utilize it by doing something. Hence I embarked on this journey.
