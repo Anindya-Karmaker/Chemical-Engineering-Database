@@ -3,8 +3,11 @@ I am creating a database for chemical engineers consisting of spectroscopy data 
 
 This is version 1.10 for Public Testing.
 Initially it contains only infrared spectroscopy database collected from 
+
 "https://chem.libretexts.org/Bookshelves/Ancillary_Materials/Reference/Reference_Tables/Spectroscopic_Parameters/Infrared_Spectroscopy_Absorption_Table"
+
 =========I DO NOT OWN ANY RIGHTS FOR THE DATABASE!==============
+
 CHANGELOG:
 
 V1.00
