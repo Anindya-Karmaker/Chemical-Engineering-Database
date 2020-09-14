@@ -20,7 +20,7 @@ Fixed several bugs.
 Improved code.
 Fixed layout issues.
 Works independent of DB file.
-Removed unused libraries and comments.
+Fixed libraries and comments.
 
 INTRODUCTION:
 I am NOT A PROFESSIONAL PROGRAMMER. I have done some courses on Python from Coursera and have started on this journey. I am a Chemical Engineer by profession and will soon start my PhD. Since due to the pandemic, I have a lot of free time so I wanted to utilize it by doing something. Hence I embarked on this journey.
