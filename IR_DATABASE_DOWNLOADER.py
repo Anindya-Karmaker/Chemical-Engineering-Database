@@ -3,6 +3,7 @@ import urllib.request, urllib.parse, urllib.error
 import ssl
 import sqlite3
 import tkinter as Tk
+from bs4 import BeautifulSoup
 from tkinter import *
 from tkinter import ttk
 from tkinter.scrolledtext import ScrolledText
