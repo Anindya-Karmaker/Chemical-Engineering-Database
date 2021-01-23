@@ -1,7 +1,7 @@
 # Chemical-Engineering-Database
 I am creating a database for chemical engineers consisting of spectroscopy data to thermodynamic tables so that engineers can do more work in less time
 
-This is version 1.10 for Public Testing.
+This is version 2.00 for Public Testing.
 Infrared Spectroscopy Data is based on the website
 https://chem.libretexts.org/Bookshelves/Ancillary_Materials/Reference/Reference_Tables/Spectroscopic_Parameters/Infrared_Spectroscopy_Absorption_Table
 
