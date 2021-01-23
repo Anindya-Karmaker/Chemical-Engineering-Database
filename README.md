@@ -3,12 +3,12 @@ I am creating a database for chemical engineers consisting of spectroscopy data 
 
 This is version 2.00 for Public Testing.
 Infrared Spectroscopy Data is based on the website
-https://chem.libretexts.org/Bookshelves/Ancillary_Materials/Reference/Reference_Tables/Spectroscopic_Parameters/Infrared_Spectroscopy_Absorption_Table
+https://chem.libretexts.org/Bookshelves/Ancillary_Materials/Reference/Reference_Tables/Spectroscopic_Parameters/Infrared_Spectroscopy_Absorption_Table \n
 
-The steam properties are based on IAPWS 95 and IAPWS 97. IAPWS 95 is based on the NIST DATABASE
-http://www.nist.gov/srd/upload/NISTIR5078.htm
+The steam properties are based on IAPWS 95 and IAPWS 97. IAPWS 95 is based on the NIST DATABASE \n
+http://www.nist.gov/srd/upload/NISTIR5078.htm \n
 COPYRIGHT INFORMATION:
-Use of NIST Information: These World Wide Web pages are provided as a public service by the National Institute of Standards and Technology (NIST). With the exception of material marked as copyrighted, information presented on these pages is considered public information and may be distributed or copied. Use of appropriate byline/photo/image credits is requested
+Use of NIST Information: These World Wide Web pages are provided as a public service by the National Institute of Standards and Technology (NIST). With the exception of material marked as copyrighted, information presented on these pages is considered public information and may be distributed or copied. Use of appropriate byline/photo/image credits is requested \n
 IAPWS 97 is based on the Python implementation of standards from The International Association for the Properties of Water and Steam(IAPWS)
 https://pypi.org/project/iapws/
 Antoine tables and its database is based on the work by
