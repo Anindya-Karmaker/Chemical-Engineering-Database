@@ -39,24 +39,29 @@ Major Release
 Contains Steam Tables, Antoine Tables, DNA Translation and Primer Sequencing Tools
 
 INTRODUCTION:
+
 I am NOT A PROFESSIONAL PROGRAMMER. I have done some courses on Python from Coursera and have started on this journey. I am a Chemical Engineer by profession and will soon start my PhD. Since due to the pandemic, I have a lot of free time so I wanted to utilize it by doing something. Hence I embarked on this journey.
 
 INSTRUCTION FOR DOWNLOADING AND SETUP:
-If you have Python installed on your PC, then just copy the "IR_DATABASE_DOWNLOADER.py" file and "IR_DATA.sqlite" file, copy both files to a folder and run the program by clicking on "IR_DATABASE_DOWNLOADER.py" file. For general users, just copy the "IR_DATABASE_DOWNLOADER.exe" and "IR_DATA.sqlite" file and run the program just like any EXE.
-I REPEAT THE PROGRAM WILL CRASH IF YOU DO NOT HAVE THE "IR_DATA.sqlite" FILE IN THE SAME FOLDER AS THE PYTHON FILE OR EXE FILE.
+
+If you have Python installed on your PC, then just copy the "Chemical_engineering_toolkit.py" file and "Master.db" file, copy both files to a folder and run the program by clicking on "Chemical_engineering_toolkit.py" file. For general users, download the files from the link given below and extract them. Now run by clickin on the exe "Chemical_engineering_toolkit.exe". Please make sure that the "Master.db" file is present in the same folder as the exe file.
+
+DOWNLOAD LINKS:
+
+The program contains all libraries and python executables in itself and is huge in file size. Since GitHub Doesnot allow files larger than 25 MB so the binary files were uploaded to Google drive. Please Download from Google Drive Link
+https://drive.google.com/file/d/101lxByh6dGtiYmNvh_CAfdAoTeMS7Eys/view?usp=sharing
+
 
 GUIDELINES FOR USING:
+
 Please check the How To Use Video
 https://drive.google.com/file/d/1btMDPDPe8D5Dk9wH4qFosDq1KUxjuBj1/view?usp=sharing
 
-DOWNLOAD LINKS:
-The program contains all libraries and python executables in itself and is huge in file size. Since GitHub Doesnot allow files larger than 25 MB so the binary files were uploaded to Google drive. Please Download from Google Drive Link
-https://drive.google.com/file/d/101lxByh6dGtiYmNvh_CAfdAoTeMS7Eys/view?usp=sharing
 
 ANTIVIRUS WARNING:
 I personally tested it and can gurantee that my program is free from any malware. But please check the files and always download files from the official source. 
 
 FUTURE UPDATES:
-I do not know when!!! But I want to add UV/VIS, NMR, Genomic Data and thermodynamic data that facilitates the research work of most engineers.
+I do not know when!!! But I want to add UV/VIS, NMR, Genomic Data and other thermodynamic data that facilitates the research work of most engineers.
 
 Thank you for your patience.
