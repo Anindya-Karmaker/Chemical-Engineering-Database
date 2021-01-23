@@ -44,7 +44,7 @@ I am NOT A PROFESSIONAL PROGRAMMER. I have done some courses on Python from Cour
 
 INSTRUCTION FOR DOWNLOADING AND SETUP:
 
-If you have Python installed on your PC, then just copy the "Chemical_engineering_toolkit.py" file and "Master.db" file, copy both files to a folder and run the program by clicking on "Chemical_engineering_toolkit.py" file. For general users, download the files from the link given below and extract them. Now run by clickin on the exe "Chemical_engineering_toolkit.exe". Please make sure that the "Master.db" file is present in the same folder as the exe file.
+If you have Python installed on your PC, then just copy the "Chemical_engineering_toolkit.py" file and "Master.db" file, copy both files to a folder and run the program by clicking on "Chemical_engineering_toolkit.py" file. Some libraries will need to installed manually like numpy, sci-py, iapws, beautifulSoup and tabulate.For general users, download the files from the link given below and extract them. Now run by clicking on the exe "Chemical_engineering_toolkit.exe". Please make sure that the "Master.db" file is present in the same folder as the exe file.
 
 DOWNLOAD LINKS:
 
