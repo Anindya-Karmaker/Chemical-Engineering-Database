@@ -57,9 +57,14 @@ If you have Python installed on your PC, then just copy the "Chemical_engineerin
 
 DOWNLOAD LINKS:
 NEW VERSION(v3.00)
-Download the exe file and Master.db file and place them in the same folder and run the exe. Initially, it may take about a minute or two to load.
+Download the software and database files and place them in the same folder and run the exe. Initially, it may take about a minute or two to load. You can download from here or select the release link and download the exe and db file from there.
 
-OLD VERSION(v2.00)
+MAIN SOFTWARE
+https://github.com/Anindya-Karmaker/Chemical-Engineering-Database/releases/download/3.0/Chemical_engineering_toolkit.exe
+DATABASE
+https://github.com/Anindya-Karmaker/Chemical-Engineering-Database/releases/download/3.0/Master.db
+
+OLD VERSION(v2.00)(WILL REMOVE IT AFTER JULY 30)
 The program contains all libraries and python executables in itself and is huge in file size. Since GitHub Doesnot allow files larger than 25 MB so the binary files were uploaded to Google drive. Please Download from Google Drive Link
 https://drive.google.com/file/d/101lxByh6dGtiYmNvh_CAfdAoTeMS7Eys/view?usp=sharing
 
