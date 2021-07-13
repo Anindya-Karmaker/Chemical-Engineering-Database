@@ -25,7 +25,7 @@ C. L. Yaws, “Critical Properties and Acentric Factor – Organic Compounds,”
 
 =========All Databases used are provided without warranty and is the respective property of the owner==============
 
-REQUIRED PYTHON VERSION: 3.8+
+REQUIRED PYTHON VERSION: 3.7+
 
 CHANGELOG:
 
