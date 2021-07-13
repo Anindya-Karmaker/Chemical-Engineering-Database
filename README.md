@@ -45,6 +45,7 @@ Contains Steam Tables, Antoine Tables, DNA Translation and Primer Sequencing Too
 
 V3.00
 Added Critical Properties and Acentric Factors of over 10,000 compounds
+Reduced executable size to about 60 MB (previous version was >200MB)
 
 INTRODUCTION:
 
@@ -55,7 +56,10 @@ INSTRUCTION FOR DOWNLOADING AND SETUP:
 If you have Python installed on your PC, then just copy the "Chemical_engineering_toolkit.py" file and "Master.db" file, copy both files to a folder and run the program by clicking on "Chemical_engineering_toolkit.py" file. Some libraries will need to installed manually like numpy, sci-py, iapws, beautifulSoup and tabulate.For general users, download the files from the link given below and extract them. Now run by clicking on the exe "Chemical_engineering_toolkit.exe". Please make sure that the "Master.db" file is present in the same folder as the exe file.
 
 DOWNLOAD LINKS:
+NEW VERSION(v3.00)
+Download the exe file and Master.db file and place them in the same folder and run the exe. Initially, it may take about a minute or two to load.
 
+OLD VERSION(v2.00)
 The program contains all libraries and python executables in itself and is huge in file size. Since GitHub Doesnot allow files larger than 25 MB so the binary files were uploaded to Google drive. Please Download from Google Drive Link
 https://drive.google.com/file/d/101lxByh6dGtiYmNvh_CAfdAoTeMS7Eys/view?usp=sharing
 
