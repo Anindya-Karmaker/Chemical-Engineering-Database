@@ -3,6 +3,7 @@ import urllib.request, urllib.parse, urllib.error
 import ssl
 import sqlite3
 import tkinter as Tk
+import time
 from bs4 import BeautifulSoup
 from tkinter import *
 from tkinter import ttk
@@ -37,14 +38,18 @@ iapwsversion=95
 outputunit=['SI Units','US customary Units']
 chooseunit=0
 ant_chem={}
+crt_chem={}
+critical_constants={}
 antoine_constants={}
 chosen_ant_chem=''
+chosen_crt_chem=''
 T_UNITDISP='°C'
 P_UNITDISP='MPa'
 ant_tmin=''
 ant_tmax=''
 cm=0
 find_type_ant=0
+find_type_crt=0
 dat_check=0
 cmdlineq=''
 statement=''
@@ -159,29 +164,37 @@ def W_m_k_to_BTU_h_ft_F(value):
     val=float(value)*0.5781759824
     return val
 def C_to_other(value,unit):
-    if(unit==0):
-        val=float(value)
-    elif(unit==1):
-        val=float(value)*(9/5)+32
-    elif(unit==2):
-        val=float(value)+273.15
-    elif(unit==3):
-        val=float(value)*(9/5)+491.67
-    return val
+    try:
+        if(unit==0):
+            val=float(value)
+        elif(unit==1):
+            val=float(value)*(9/5)+32
+        elif(unit==2):
+            val=float(value)+273.15
+        elif(unit==3):
+            val=float(value)*(9/5)+491.67
+        return val
+    except:
+        return 'N/A'
+    
 def Mpa_to_other(value,unit):
-    if(unit==0):
+    try:
         val=float(value)
-    elif(unit==1):
-        val=float(value)*1000
-    elif(unit==2):
-        val=float(value)/0.006894757293
-    elif(unit==3):
-        val=float(value)*10
-    elif(unit==4):
-        val=float(value)*9.8692326671601283
-    elif(unit==5):
-        val=float(value)*7500.6157584565623439424245176757
-    return val
+        if(unit==0):
+            val=val
+        elif(unit==1):
+            val=float(value)*1000
+        elif(unit==2):
+            val=float(value)/0.006894757293
+        elif(unit==3):
+            val=float(value)*10
+        elif(unit==4):
+            val=float(value)*9.8692326671601283
+        elif(unit==5):
+            val=float(value)*7500.6157584565623439424245176757
+        return val
+    except:
+        return 'N/A'
 def P_sat_funct(Pin):
     x=[]
     hvap1=0.0
@@ -312,32 +325,40 @@ def update_ir_db():
         conn.commit()
     ir_func_group()
 
-def t_conversion(val,unit):
-    val=float(val)
-    if(unit==0):
-        out=val
-    elif(unit==1):
-        out=(val-32)*(5/9)
-    elif(unit==2):
-        out=val-273.15
-    elif(unit==3):
-        out=(val-491.67)*(5/9)
-    return out
+def t_conversion(val,unit):#converting all temperature units to Celsius first
+    try:
+        val=float(val)
+        if(unit==0):
+            out=val
+        elif(unit==1):
+            out=(val-32)*(5/9)
+        elif(unit==2):
+            out=val-273.15
+        elif(unit==3):
+            out=(val-491.67)*(5/9)
+        return out
+    except:
+        return 'N/A'
+    
 
-def p_conversion(val,unit):
-    if(unit==0):
-        out=float(val)
-    elif(unit==1):
-        out=float(val)/1000
-    elif(unit==2):
-        out=float(val)*0.006894757293
-    elif(unit==3):
-        out=float(val)/10
-    elif(unit==4):
-        out=float(val)/9.8692326671601283
-    elif(unit==5):
-        out=float(val)/7500.6157584565623439424245176757
-    return out
+def p_conversion(val,unit):#converting all pressure units to MPa first
+    try:
+        val=float(val)
+        if(unit==0):
+            out=val
+        elif(unit==1):
+            out=float(val)/1000
+        elif(unit==2):
+            out=float(val)*0.006894757293
+        elif(unit==3):
+            out=float(val)/10
+        elif(unit==4):
+            out=float(val)/9.8692326671601283
+        elif(unit==5):
+            out=float(val)/7500.6157584565623439424245176757
+        return out
+    except:
+        return 'N/A'
 
 def interpolate_var(processval, var1, t_low, t_high):
         global tempvarinterpolate
@@ -393,24 +414,54 @@ def Clickbinder(r):
         print (' - Clickbinder, something wrong')
         pass
     
+ 
+
+
+
 def interface_user():
     global statement
-    global cm
+    global cm 
+     
+    
     window = ThemedTk(theme='adapta')
     window.geometry("900x370")
     window.title("Chemical Engineering Toolkit")
     window.resizable(False, False)
-    window.lift()
-    window.attributes('-topmost',True)
-    window.after_idle(window.attributes,'-topmost',False)
-    # window.attributes('-alpha',0.96)
-    #style.configure(".")["background"]
-    # window['bg']='#f0f0f0'
+    window.withdraw()
     style_config=ttk.Style()
     style_config.theme_use('adapta')
     style_config.configure("Tab", focuscolor='00bcd4',padx=2,pady=2)
     style_config.configure("TButton", font=("Arial", 12),anchor=CENTER)
     style_config.configure("TMenubutton", font=("Arial", 12),anchor=CENTER)
+    
+   
+    window.attributes('-alpha',0.96)
+    #style.configure(".")["background"]
+    # window['bg']='#f0f0f0'
+    splash_root = Toplevel()
+    splash_root.attributes('-alpha',0.96)
+    splash_root.geometry("400x100")
+    splash_label1 = ttk.Label(splash_root,text="CHEMICAL ENGINEERING TOOLKIT",font=("Arial Bold",14))
+    splash_label1.pack() 
+    splash_label1 = ttk.Label(splash_root,text="Software Version: 3.0",font=("Arial Bold",14))
+    splash_label1.pack() 
+    splash_label1 = ttk.Label(splash_root,text="Developed by Anindya Karmaker",font=("Arial Bold",14))
+    splash_label1.pack() 
+    splash_label2 = ttk.Label(splash_root,text="Loading database please wait",font=("Arial Bold",14))
+    splash_label2.pack()
+    
+     
+    splash_root.overrideredirect(True)
+    style_config=ttk.Style()
+    style_config.theme_use('adapta')
+    style_config.configure("Tab", focuscolor='00bcd4',padx=2,pady=2)
+    style_config.configure("TButton", font=("Arial", 12),anchor=CENTER)
+    style_config.configure("TMenubutton", font=("Arial", 12),anchor=CENTER)
+      
+    
+    splash_root.attributes('-topmost', True)
+    splash_root.lift()
+    splash_root.update()
     
     window.bind('<Button-3>',Clicker, add='')
     TC= ttk.Notebook(window,takefocus=0)
@@ -418,11 +469,13 @@ def interface_user():
     CLONING =  ttk.Frame(TC)
     STEAMTAB= ttk.Frame(TC)
     ANTOINETAB=ttk.Frame(TC)
+    CRITICALTAB=ttk.Frame(TC)
     INFO = ttk.Frame(TC) 
     TC.add(ESTIMATE, text='Infrared Spectroscopy')      
     TC.add(CLONING, text='DNA Cloning/Primer Design')
     TC.add(STEAMTAB, tex='Steam Tables')
     TC.add(ANTOINETAB, text='Antoine Tables') 
+    TC.add(CRITICALTAB, text='Critical Data') 
     TC.add(INFO, text='Information')    
     TC.pack(expand=1, fill="both")    
     IR_ESTIMATE=ttk.Frame(ESTIMATE)
@@ -433,9 +486,11 @@ def interface_user():
     Steam_tables.pack()
     Antoine_tables=ttk.Frame(ANTOINETAB)
     Antoine_tables.pack()
+    critical_tables=ttk.Frame(CRITICALTAB)
+    critical_tables.pack()
     infoview=ttk.Frame(INFO)
     infoview.pack()
-    lbl5 = ttk.Label(infoview, text="Chemical Engineering Toolkit V2.0", font=("Arial Bold", 14))
+    lbl5 = ttk.Label(infoview, text="Chemical Engineering Toolkit V3.0", font=("Arial Bold", 14))
     lbl5.pack(fill='x')
     lbl6 = ttk.Label(infoview, text="Software Created by Anindya Karmaker", font=("Arial", 12))
     lbl6.pack(fill=X)
@@ -443,10 +498,15 @@ def interface_user():
     lbl7.pack(fill=X)
     lbl7p = ttk.Label(infoview, text="Bangladesh University of Engineering and Technology(BUET)", font=("Arial", 12))
     lbl7p.pack(fill=X)
+    
+    label9p = ttk.Label(infoview,text="ACKNOWLEDGEMENT",font=("Arial Bold",14))
+    label9p.pack(fill='x')
+    label0p = ttk.Label(infoview,text="I would like to acknowledge the sincere efforts and encouragement by Professor Dr. Shoeb Ahmed and Ahaduzzaman Nahid",font=("Arial", 12))
+    label0p.pack(fill='x') 
     lbl8 = ttk.Label(infoview, text="References", font=("Arial Bold", 14))
     lbl8.pack(fill=X)
     lble1 = ScrolledText(infoview, wrap=WORD,font=("Arial", 12))
-    statementinfo='Infrared Spectroscopy Data is based on the website\nhttps://chem.libretexts.org/Bookshelves/Ancillary_Materials/Reference/Reference_Tables/Spectroscopic_Parameters/Infrared_Spectroscopy_Absorption_Table\n\nThe steam properties are based on IAPWS 95 and IAPWS 97. IAPWS 95 is based on the NIST DATABASE\nhttp://www.nist.gov/srd/upload/NISTIR5078.htm\n\nCOPYRIGHT INFORMATION:\nUse of NIST Information: These World Wide Web pages are provided as a public service by the National Institute of Standards and Technology (NIST). With the exception of material marked as copyrighted, information presented on these pages is considered public information and may be distributed or copied. Use of appropriate byline/photo/image credits is requested\n\nIAPWS 97 is based on the Python implementation of standards from The International Association for the Properties of Water and Steam(IAPWS)\nhttps://pypi.org/project/iapws/\n\nAntoine tables and its database is based on the work by \nYaws, C.  L.  and Yang, H.  C. "To estimate vapor pressure easily, antoine coefficients relate vapor pressure to temperature for almost 700 major organic compounds", Hydrocarbon Processing, 68(10), p65-68, 1989'
+    statementinfo='Infrared Spectroscopy Data is based on the website\nhttps://chem.libretexts.org/Bookshelves/Ancillary_Materials/Reference/Reference_Tables/Spectroscopic_Parameters/Infrared_Spectroscopy_Absorption_Table\n\nThe steam properties are based on IAPWS 95 and IAPWS 97. IAPWS 95 is based on the NIST DATABASE\nhttp://www.nist.gov/srd/upload/NISTIR5078.htm\n\nCOPYRIGHT INFORMATION:\nUse of NIST Information: These World Wide Web pages are provided as a public service by the National Institute of Standards and Technology (NIST). With the exception of material marked as copyrighted, information presented on these pages is considered public information and may be distributed or copied. Use of appropriate byline/photo/image credits is requested\n\nIAPWS 97 is based on the Python implementation of standards from The International Association for the Properties of Water and Steam(IAPWS)\nhttps://pypi.org/project/iapws/\n\nAntoine tables and its database is based on the work by \nYaws, C.  L.  and Yang, H.  C. "To estimate vapor pressure easily, antoine coefficients relate vapor pressure to temperature for almost 700 major organic compounds", Hydrocarbon Processing, 68(10), p65-68, 1989\n\nCritical Properties and Accentric Factors are based on the work by \nC. L. Yaws and P. K. Narasimhan, “Critical properties and acentric factor—organic compounds,” in Thermophysical properties of chemicals and hydrocarbons, Elsevier, 2009, pp. 1–95.\nAnd\nC. L. Yaws, “Critical Properties and Acentric Factor – Organic Compounds,” in Thermophysical properties of chemicals and hydrocarbons, 2nd ed., William Andrew, 2014\n'
     lble1.insert(INSERT,statementinfo)
     lble1.config(width=860,height=12,padx=2,pady=2)
     lble1.config(state='disabled')
@@ -1686,7 +1746,7 @@ def interface_user():
         for items in range(len(ant_chem)):
             part1=str(list(ant_chem.keys())[items])
             part2=str(list(ant_chem.values())[items])
-            listfunc_ant.insert(items, str(part1+'('+part2+')'))
+            listfunc_ant.insert(items, str(part1+' ['+part2+']'))
         cm_2=1
 
     ant_main1_PRIME=ttk.Frame(Antoine_tables)
@@ -1744,7 +1804,7 @@ def interface_user():
         while once!=1:
             lbdisp_ant.configure(state='normal')
             lbdisp_ant.delete('1.0','end')
-            statement='Please enter new chemical data as required. Make sure that the formula is P(mmHg)=A-B/(T(°C)+C). All variables are float formated other than names so using comma or other characters will prevent from saving. If T(min) or T(max) values are not available, please set some values like 0 instead. You will get temperature range exceeded error though'
+            statement='Please enter new chemical data as required. Make sure that the formula is log10(P(mmHg))=A-B/(T(°C)+C). All variables are float formated other than names so using comma or other characters will prevent from saving. If T(min) or T(max) values are not available, please set some values like 0 instead. You will get temperature range exceeded error though'
             lbdisp_ant.insert(INSERT,statement)
             lbdisp_ant.configure(state='disabled')
             once=1
@@ -1818,9 +1878,9 @@ def interface_user():
             for items in range(len(ant_chem)):
                 part1=str(list(ant_chem.keys())[items])
                 part2=str(list(ant_chem.values())[items])
-                listfunc_ant.insert(items, str(part1+'('+part2+')'))
+                listfunc_ant.insert(items, str(part1+' ['+part2+']'))
         def delete_custom():
-            command4='DELETE FROM "Antoine Constants" WHERE "index">696'
+            command4='DELETE FROM "Antoine Constants" WHERE "index">700'
             cur.execute(command4)
             conn.commit()
             lbdisp_ant.configure(state='normal')
@@ -1836,7 +1896,7 @@ def interface_user():
             for items in range(len(ant_chem)):
                 part1=str(list(ant_chem.keys())[items])
                 part2=str(list(ant_chem.values())[items])
-                listfunc_ant.insert(items, str(part1+'('+part2+')'))
+                listfunc_ant.insert(items, str(part1+'['+part2+']'))
         ant_adv_entry4=ttk.Frame(new)
         ant_adv_entry4.grid(row=3,column=0, padx=5,pady=5,sticky='nsew')
         updatedb_ant=ttk.Button(ant_adv_entry4, text="ADD CUSTOM DATA",takefocus=0,command=button_adv)
@@ -1850,11 +1910,12 @@ def interface_user():
         global ant_tmax
         global T_unitselection
         chosen_ant_chem=str((listfunc_ant.get(ANCHOR)))
-        labelchem.set(str(chosen_ant_chem.split('(')[0]).capitalize())
+        labelchem.set(str(chosen_ant_chem.split('[')[0]))
         ant_tmin=''
         ant_tmax=''
-        cmdlineq='SELECT * FROM'+' "Antoine Constants"'+'WHERE '+'"compound name"'+'='+'"'+str(chosen_ant_chem.split('(')[0])+'"'
+        cmdlineq='SELECT * FROM'+' "Antoine Constants"'+'WHERE '+'"compound name"'+'='+'"'+str(chosen_ant_chem.split('[')[0]).strip()+'"'+' COLLATE NOCASE'
         row=cur.fetchone()
+        print(str(chosen_ant_chem))
         for row in cur.execute(cmdlineq):
             ant_tmin=(str(row[6]))
             ant_tmax=(str(row[7]))
@@ -1883,7 +1944,7 @@ def interface_user():
             for items in range(len(ant_chem)):
                 part1=str(list(ant_chem.keys())[items])
                 part2=str(list(ant_chem.values())[items])
-                listfunc_ant.insert(items, str(part1+'('+part2+')'))
+                listfunc_ant.insert(items, str(part1+' ['+part2+']'))
         else:
             for i,chem_name in enumerate(list(ant_chem.keys())):
                 if list_item.lower() in chem_name:
@@ -1891,18 +1952,18 @@ def interface_user():
             if(len(indices)==0):
                 find_type_ant=1
                 for i,chem_form in enumerate(list(ant_chem.values())):
-                    if list_item.upper() in chem_form:
+                    if list_item == chem_form:
                         indices.append(i)
             if(find_type_ant==0):
                 for i in indices:
                     part1=str(list(ant_chem.keys())[i])
                     part2=str(list(ant_chem.values())[i])
-                    new_list.append(str(part1+'('+part2+')'))
+                    new_list.append(str(part1+' ['+part2+']'))
             elif(find_type_ant==1):
                 for i in indices:
                     part1=str(list(ant_chem.keys())[i])
                     part2=str(list(ant_chem.values())[i])
-                    new_list.append(str(part1+'('+part2+')'))
+                    new_list.append(str(part1+' ['+part2+']'))
             for items in range(len(new_list)):
                 listfunc_ant.insert(items, new_list[items])
             print(list_item)
@@ -1934,7 +1995,7 @@ def interface_user():
             T_OUT=C_to_other(T, T_unitselection)    
             P_OUT=Mpa_to_other(vP, P_unitselection)            
             y_dat=['Chemical Name','T('+T_UNITDISP+')','P('+P_UNITDISP+')']
-            x_dat=[[chosen_ant_chem.split('(')[0].strip().upper(),T_OUT,P_OUT]]
+            x_dat=[[chosen_ant_chem.split('[')[0].strip(),T_OUT,P_OUT]]
             x=tabulate(x_dat, headers=y_dat)
             lbdisp_ant.insert(INSERT,x)
             if(T>float(ant_tmax) or T<float(ant_tmin)):
@@ -1972,7 +2033,7 @@ def interface_user():
             T_OUT=C_to_other(T, T_unitselection)    
             P_OUT=Mpa_to_other(P, P_unitselection)            
             y_dat=['Chemical Name','P('+P_UNITDISP+')','T('+T_UNITDISP+')']
-            x_dat=[[chosen_ant_chem.split('(')[0].strip().upper(),P_OUT,T_OUT]]
+            x_dat=[[chosen_ant_chem.split('[')[0].strip(),P_OUT,T_OUT]]
             x=tabulate(x_dat, headers=y_dat)
             lbdisp_ant.insert(INSERT,x)
             if(T>float(ant_tmax) or T<float(ant_tmin)):
@@ -1990,6 +2051,185 @@ def interface_user():
     option_ant.bind('<Key-Return>',ant_chem_list_find)
     solve_ant_P_base.bind('<Button-1>',estimate_temperature_from_vapor_pressure)
     solve_ant_T_base.bind('<Button-1>',estimate_vapor_pressure)
-    window.mainloop()
+    
+    ######################################################################
+    
+    def crt_chem_list():
+        global crt_chem
+        global statement
+        crt_chem_form=[]
+        crt_chem_name=[]
+        try:
+            cmdlineq="SELECT * FROM"+" 'Critical Constants'"
+            row=cur.fetchone()
+            for row in cur.execute(cmdlineq):
+                   crt_chem_form.append(str(row[1]))
+                   crt_chem_name.append(str(row[2]))
+            crt_chem_temp=dict(zip(crt_chem_name, crt_chem_form))
+            crt_chem = collections.OrderedDict(sorted(crt_chem_temp.items()))
+        except:
+            statement="NO DATABASE FOUND PLEASE UPDATE DATABASE!"
+            
+    cm_3=0
+    crt_main0=ttk.Frame(critical_tables)
+    crt_main0.grid(row=0,column=0, padx=5,pady=5,ipady=2,sticky=N)  
+    lb_crt=ttk.Label(crt_main0, text="Search and Choose Chemical",justify='center', font=("Arial", 13,"bold")).pack(side=TOP)
+    option_crt=Entry(crt_main0, width=43,font=("Consolas", 13))
+    option_crt.pack(side=TOP,fill="both",pady=4)
+    
+    search_crt=ttk.Button(crt_main0, text="Search",takefocus=0)#, font=("Arial", 13,"bold"), height=1, width=23)
+    search_crt.pack(side=TOP,anchor=N,fill='x',expand=TRUE)
+    # popupMenuCHOOSE_unit_crt = ttk.OptionMenu(crt_main0, tkUNITS,outputunit[0], *outputunit, command = OptionMenu_SelectionEvent_UNITS)
+    # popupMenuCHOOSE_unit_crt.configure(width=43,takefocus=0,)
+    # popupMenuCHOOSE_unit_crt.pack(side=TOP,fill='y',expand=TRUE,anchor=NW) 
+    listfunc_crt = Listbox(crt_main0, width=45, activestyle='none',height=11,justify='left', font=("Arial", 12),selectmode=BROWSE,exportselection=False,takefocus=0)
+    listfunc_crt.pack(side=LEFT, pady=10,fill="x")
+    scrollbar_crt = Scrollbar(crt_main0, orient="vertical")
+    scrollbar_crt.config(command=listfunc_crt.yview)
+    scrollbar_crt.pack(pady=10,side=RIGHT,anchor=N, fill="both")
+    listfunc_crt.config(yscrollcommand=scrollbar_crt.set)
+    
+    
+    
+    while cm_3!=1:
+        crt_chem_list()
+        listfunc_crt.delete('0','end')
+        part1=''
+        part2=''
+        for items in range(len(crt_chem)):
+            part1=str(list(crt_chem.keys())[items])
+            part2=str(list(crt_chem.values())[items])
+            listfunc_crt.insert(items, str(part1+' ['+part2+']'))
+        cm_3=1
+
+
+    crt_main1_PRIME=ttk.Frame(critical_tables)
+    crt_main1_PRIME.grid(row=0,column=1, padx=5,pady=5,ipadx=10,ipady=10,sticky='nsew')
+    crt_main1=ttk.Frame(crt_main1_PRIME)
+    crt_main1.grid(row=0,column=0, padx=5,pady=2,sticky='nsew')
+    crt_chemLabelPressure=ttk.Label(crt_main1, width=20,text="Pressure Unit: ", justify='center',font=("Arial", 13,"bold")).pack(side=LEFT)
+    popupMenupressure_unit_crt = ttk.OptionMenu(crt_main1, tkPressureUnit,pressureunit[0], *pressureunit, command = OptionMenu_SelectionEvent_PressureUnit)
+    popupMenupressure_unit_crt.configure(takefocus=0,)
+    popupMenupressure_unit_crt.pack(side=LEFT,fill='both',expand=TRUE,anchor=W)
+    crt_main2=ttk.Frame(crt_main1_PRIME)
+    crt_main2.grid(row=1,column=0, padx=5,pady=2,sticky='nsew')
+    ant_chem_labelTemperature=ttk.Label(crt_main2, width=20,text="Temperature Unit: ", justify='center',font=("Arial", 13,"bold")).pack(side=LEFT)
+    popupMenuTemp_unit_ant = ttk.OptionMenu(crt_main2, tkTemperatureUnit,temperatureunit[T_unitselection], *temperatureunit, command = OptionMenu_SelectionEvent_TemperatureUnit)
+    popupMenuTemp_unit_ant.configure(takefocus=0,)
+    popupMenuTemp_unit_ant.pack(side=LEFT,fill='x',expand=TRUE,anchor=NW) 
+    crt_main3=ttk.Frame(crt_main1_PRIME)
+    crt_main3.grid(row=2,column=0, padx=2,sticky='nsew')
+    solution_crt=ScrolledText(crt_main3, padx=5,width=46,height=12,font=("Consolas", 12))
+    solution_crt.pack(pady=2,anchor=NW)
+    
+    
+    
+    def crt_chem_choosen(evt):
+        global chosen_crt_chem
+        global critical_constants
+        global T_unitselection
+        global P_unitselection
+        global chooseunit
+        y_dat0=['FORMULA','CAS-NO.','MW(g/mol)']
+        y_dat1=['Tf','Tb','Tc','Pc']   
+        y_dat2=['Vc(cc/mol)','Rho(g/mol)','Zc','Omega']
+        y_datT=['(°C)','(°F)','(K)','(°R)']
+        y_datP=['(MPa)','(kPa)','(PSI)','(Bar)','(Atm)','(mmHg)'] 
+        x_1_4=[]
+        x_5_8=[]
+        x_9_12=[]
+        chosen_crt_chem=str((listfunc_crt.get(ANCHOR)))
+        cmdlineq='SELECT DISTINCT * FROM'+' "Critical Constants"'+'WHERE '+'"Name"'+'='+'"'+str(chosen_crt_chem.split('[')[0]).strip()+'"'+' COLLATE NOCASE ORDER BY "Index_i" DESC LIMIT 1'
+        print(cmdlineq)
+        row=cur.fetchone()
+        print(str(chosen_crt_chem))
+        for i in range(len(y_dat1)):
+            if(i<3):
+                y_dat1[i]=y_dat1[i]+y_datT[T_unitselection]
+            else:
+                y_dat1[i]=y_dat1[i]+y_datP[P_unitselection]
+            print(y_dat1[i])
+        for row in cur.execute(cmdlineq):
+            x_1_4.append(row[1])#Formula
+            x_1_4.append(row[3])#CAS-NO
+            x_1_4.append(row[4])#MW
+            x_5_8.append(str(C_to_other(t_conversion(row[5],2),T_unitselection)))#Tf
+            x_5_8.append(str(C_to_other(t_conversion(row[6],2),T_unitselection)))#Tb
+            x_5_8.append(str(C_to_other(t_conversion(row[7],2),T_unitselection)))#Tc
+            x_5_8.append(str(Mpa_to_other(p_conversion(row[8],3),P_unitselection)))#Pc
+            print(x_5_8[3])
+            x_9_12.append(row[9])#Vc
+            x_9_12.append(row[10])#Rho
+            x_9_12.append(row[11])#Zc
+            x_9_12.append(row[12])#Omega
+        out1=tabulate([x_1_4], headers=y_dat0)
+        out2=tabulate([x_5_8], headers=y_dat1)
+        out3=tabulate([x_9_12], headers=y_dat2)
+        solution_crt.delete('1.0',END)
+        print(out1)
+        print(out2)
+        print(out3)
+        solution_crt.insert(INSERT,out1)
+        solution_crt.insert(INSERT,'\n')
+        solution_crt.insert(INSERT,'\n')
+        solution_crt.insert(INSERT,out2)
+        solution_crt.insert(INSERT,'\n')
+        solution_crt.insert(INSERT,'\n')
+        solution_crt.insert(INSERT,out3)
+    def crt_chem_list_find(event):
+        global crt_chem
+        global find_type_crt
+        find_type_crt=0
+        new_list=[]
+        list_item=option_crt.get()
+        list_item=list_item.replace(" ",'-')
+        listfunc_crt.delete('0','end')
+        indices=[]
+        part1=''
+        part2=''
+        if(list_item==''):
+            crt_chem_list()
+            listfunc_crt.delete('0','end')
+            for items in range(len(crt_chem)):
+                part1=str(list(crt_chem.keys())[items])
+                part2=str(list(crt_chem.values())[items])
+                listfunc_crt.insert(items, str(part1+' ['+part2+']'))
+        else:
+            for i,chem_name in enumerate(list(crt_chem.keys())):
+                if list_item.lower() in chem_name:
+                    indices.append(i)
+            if(len(indices)==0):
+                find_type_crt=1
+                for i,chem_form in enumerate(list(crt_chem.values())):
+                    if list_item == chem_form:
+                        indices.append(i)
+            if(find_type_crt==0):
+                for i in indices:
+                    part1=str(list(crt_chem.keys())[i])
+                    part2=str(list(crt_chem.values())[i])
+                    new_list.append(str(part1+' ['+part2+']'))
+            elif(find_type_crt==1):
+                for i in indices:
+                    part1=str(list(crt_chem.keys())[i])
+                    part2=str(list(crt_chem.values())[i])
+                    new_list.append(str(part1+' ['+part2+']'))
+            for items in range(len(new_list)):
+                listfunc_crt.insert(items, new_list[items])
+            print(list_item)
+            print(len(new_list))
+            print(len(list(crt_chem.keys())))
+    
+    listfunc_crt.bind('<<ListboxSelect>>',crt_chem_choosen)
+    search_crt.bind('<Button-1>',crt_chem_list_find)
+    option_crt.bind('<Key-Return>',crt_chem_list_find)
+    #solve_ant_P_base.bind('<Button-1>',estimate_temperature_from_vapor_pressure)
+    splash_root.destroy()
+    window.deiconify()
+    window.lift()
+    window.attributes('-topmost',True)
+    window.after_idle(window.attributes,'-topmost',False)
+    window.mainloop()  
+
+
 interface_user()
 
