@@ -18,6 +18,11 @@ https://pypi.org/project/iapws/
 Antoine tables and its database is based on the work by
 Yaws, C.  L.  and Yang, H.  C. "To estimate vapor pressure easily, antoine coefficients relate vapor pressure to temperature for almost 700 major organic compounds", Hydrocarbon Processing, 68(10), p65-68, 1989'
 
+Critical Properties and Acentric Factors are based on the work by
+C. L. Yaws and P. K. Narasimhan, “Critical properties and acentric factor—organic compounds,” in Thermophysical properties of chemicals and hydrocarbons, Elsevier, 2009, pp. 1–95.
+and
+C. L. Yaws, “Critical Properties and Acentric Factor – Organic Compounds,” in Thermophysical properties of chemicals and hydrocarbons, 2nd ed., William Andrew, 2014
+
 =========All Databases used are provided without warranty and is the respective property of the owner==============
 
 REQUIRED PYTHON VERSION: 3.8+
@@ -37,6 +42,9 @@ Fixed libraries and comments.
 V2.00
 Major Release
 Contains Steam Tables, Antoine Tables, DNA Translation and Primer Sequencing Tools
+
+V3.00
+Added Critical Properties and Acentric Factos
 
 INTRODUCTION:
 
