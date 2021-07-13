@@ -44,7 +44,7 @@ Major Release
 Contains Steam Tables, Antoine Tables, DNA Translation and Primer Sequencing Tools
 
 V3.00
-Added Critical Properties and Acentric Factos
+Added Critical Properties and Acentric Factors of over 10,000 compounds
 
 INTRODUCTION:
 
